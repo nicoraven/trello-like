@@ -1,0 +1,26 @@
+input {
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+	font-size: 1em;
+	outline: none;
+	margin: 0 10px;
+}
+
+#new-list {
+	width: 100px;
+	background-color: #6B46A5;
+}
+
+#new-list::placeholder {
+	color: #FFF;
+}
+
+#new-list:focus {
+	background-color: #FFF;
+	color: #000;
+}
+
+#search {
+	width: 400px;
+}
