@@ -17,13 +17,34 @@ class App extends HTMLElement {
         // const app = document.getElementById('app');
         const template = document.getElementsByTagName("template")[0];
         this.shadowRoot.appendChild(template.content.cloneNode(true));
-
     }
-}
 
-customElements.define('trello-app', App);
+    connectedCallback() {
+        console.log("connected!");
+        this.addListeners();
+    };
 
-const trelloApp = document.createElement('trello-app');
+    addListeners = () => {
+        let ele = this.shadowRoot.getElementById("testing");
+        ele.addEventListener("click", this.callDb );
+    };
+
+    callDb = () => {
+        // let res = db.all();
+        fetch('http://localhost:3000/cards')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(myJson) {
+                console.log(JSON.stringify(myJson));
+            });
+    }
+
+};
+
+customElements.define("trello-app", App);
+
+const trelloApp = document.createElement("trello-app");
 
 window.onload = () => {
     document.body.appendChild(trelloApp);
