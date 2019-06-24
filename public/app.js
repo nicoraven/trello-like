@@ -20,24 +20,42 @@ class App extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log("connected!");
-        this.addListeners();
+        // console.log("connected!");
+        // this.addListeners();
+        this.callDb();
     };
 
+    // supposed to listen to input
     addListeners = () => {
         let ele = this.shadowRoot.getElementById("testing");
         ele.addEventListener("click", this.callDb );
     };
 
+    // retrieve data for initial render
     callDb = () => {
-        // let res = db.all();
+        let here = this;
         fetch('http://localhost:3000/cards')
             .then(function(response) {
                 return response.json();
             })
-            .then(function(myJson) {
-                console.log(JSON.stringify(myJson));
+            .then(function(cards) {
+                // render each card
+                cards.map(card => here.createCard(card));
             });
+    }
+
+    // render card
+    createCard = (card) => {
+        const newCard = document.createElement("trello-card");
+
+        // pass card content from db to card
+        newCard.setAttribute("id", card.id);
+        newCard.setAttribute("title", card.title);
+        newCard.setAttribute("description", card.description);
+        newCard.setAttribute("columnId", card.columnId);
+
+        // append card to app (bypass column for now)
+        this.shadowRoot.getElementById("list-wrapper").appendChild(newCard);
     }
 
 };

@@ -9,22 +9,34 @@
     </style>
 </head>
 <body>
-    <h1 id="header">Trello Clone</h1>
-    <div id="dump"></div>
-
 <!-- templates -->
     <template id="app">
         <div class="app-wrapper">
             <div class="nav-wrapper">
-                <h2 id="testing">test</h2>
                 <input id="new-list" placeholder="add new list">
                 <input id="search" placeholder="search">
             </div>
-            <div class="list-wrapper"></div>
+            <div id="list-wrapper"></div>
+        </div>
+    </template>
+
+    <template id="card">
+        <div class="card-wrapper">
+            <div class="card-actions">
+                <p id="card-delete">
+                    v
+                </p>
+                <p id="card-delete">
+                    d
+                </p>
+            </div>
+            <h1 id="card-title"></h1>
+            <p id="card-description"></p>
         </div>
     </template>
 
 <!-- javascript files -->
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="card.js"></script>
 </body>
 </html>

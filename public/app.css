@@ -24,3 +24,15 @@ input {
 #search {
 	width: 400px;
 }
+
+.list-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card-wrapper {
+	height: 200px;
+	width: 200px;
+	box-sizing: border-box;
+	background-color: #fff;
+}
