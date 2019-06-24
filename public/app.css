@@ -25,14 +25,47 @@ input {
 	width: 400px;
 }
 
-.list-wrapper {
+.nav-wrapper {
+	margin-bottom: 10px;
+}
+
+#list-wrapper {
+	width: 100%;
+	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 }
 
 .card-wrapper {
-	height: 200px;
+	/*height: 200px;*/
 	width: 200px;
 	box-sizing: border-box;
 	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.card-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.card-action-icon {
+	height: 20px;
+	width: 20px;
+}
+
+#card-title {
+	margin: 10px 0;
+	font-size: 1.2em;
+}
+
+.card-action-icon {
+	margin: 0;
+}
+
+#card-description {
+	margin: 0;
 }

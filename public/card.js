@@ -17,6 +17,7 @@ class Card extends HTMLElement {
 
     connectedCallback() {
         this.setCardContents();
+        this.addListeners();
     }
 
     setCardContents = () => {
@@ -30,6 +31,7 @@ class Card extends HTMLElement {
                     break
                 case "description":
                     this.shadowRoot.getElementById("card-description").innerText = this.attributes[i].value;
+                    this.shadowRoot.getElementById("card-description").style.display = "none";
                     break
                 case "columnId":
                     this.shadowRoot.querySelector("div").setAttribute("columnId", this.attributes[i].value);
@@ -39,6 +41,21 @@ class Card extends HTMLElement {
             }
         }
     }
+
+    addListeners = () => {
+        this.shadowRoot.getElementById("card-view").addEventListener("click", this.toggleCardDescription);
+    }
+
+    toggleCardDescription = () => {
+        let desc = this.shadowRoot.getElementById("card-description");
+        if (desc.style.display === "none") {
+            desc.style.display = "";
+        }
+        else {
+            desc.style.display = "none";
+        }
+    }
+
 }
 
 customElements.define("trello-card", Card);
