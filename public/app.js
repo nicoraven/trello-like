@@ -21,31 +21,33 @@ class App extends HTMLElement {
 
     connectedCallback() {
         // console.log("connected!");
-        // this.addListeners();
         this.callDb();
+        this.addListeners();
     };
 
     // supposed to listen to input
     addListeners = () => {
-        let ele = this.shadowRoot.getElementById("testing");
-        ele.addEventListener("click", this.callDb );
+        let create = this.shadowRoot.getElementById("new-list");
+        create.addEventListener("keydown", this.createCard );
+        create.addEventListener("blur", this.clearInput );
     };
 
     // retrieve data for initial render
     callDb = () => {
         let here = this;
         fetch('http://localhost:3000/cards')
-            .then(function(response) {
-                return response.json();
+            .then((cards) => {
+                return cards.json();
             })
             .then(function(cards) {
+                console.log(cards);
                 // render each card
-                cards.map(card => here.createCard(card));
+                cards.map(card => here.renderCard(card));
             });
     }
 
     // render card
-    createCard = (card) => {
+    renderCard = (card) => {
         const newCard = document.createElement("trello-card");
 
         // pass card content from db to card
@@ -56,6 +58,30 @@ class App extends HTMLElement {
 
         // append card to app (bypass column for now)
         this.shadowRoot.getElementById("list-wrapper").appendChild(newCard);
+    }
+
+    // create new cards from user input
+    createCard = (event) => {
+        console.log(event.target.value);
+        if (event.keyCode === 13) {
+            // console.log("hello!");
+            if (event.target.value.trim().length === 0) {
+                return;
+            }
+            else {
+                console.log("saving!", event.target.value);
+                let cardTitle = event.target.value;
+                // post then append child to dom?
+            }
+
+            // blur input to remove saved input
+            this.shadowRoot.getElementById("new-list").blur();
+        }
+
+    }
+
+    clearInput = () => {
+        this.shadowRoot.getElementById("new-list").value = "";
     }
 
 };
